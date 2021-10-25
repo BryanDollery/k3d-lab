@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: simple-pipeline
+spec:
+  workspaces:
+    - name: simple
+  resources:
+    inputs:
+      - name: simple-source
+        resourceRef:
+          name: simple-source
+    outputs:
+      - name: simple-image
+        resourceRef:
+          name: simple-image
+  params:
+    - name: context
+      type: string
+      description: Path to context
+      default: ./
+  tasks:
+    - name: dump
+      taskRef:
+        name: dump
+      workspaces:
+        - name: simple
+          workspace: simple
+    - name: build
+      taskRef:
+        name: build-and-push
+      workspaces:
+        - name: simple
+          workspace: simple
+    - name: deploy-test
+      taskRef:
+        name: deploy-test
+    - name: test
+      taskRef:
+        name: test
+      workspaces:
+        - name: simple
+          workspace: simple
+    - name: deploy-prod
+      taskRef:
+        name: deploy-prod
+

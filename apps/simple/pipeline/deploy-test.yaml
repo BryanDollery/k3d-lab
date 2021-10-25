@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: dump
+spec:
+  params:
+    - name: pathToDockerFile
+      type: string
+    - name: pathToContext
+      type: string
+  resources:
+    inputs:
+      - name: source
+        type: git
+  steps:
+    - name: dump
+      image: busybox
+      command:
+        - ls -gAlFh
