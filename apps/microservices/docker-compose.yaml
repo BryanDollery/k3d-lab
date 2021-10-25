@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   source:
-    image: bryandollery/ndsobc-microservice-dev
+    image: localhost:5000/labs/ndsobc-microservice-dev
     build:
       context: ./
       dockerfile: ./Dockerfile
@@ -13,7 +13,7 @@ services:
     environment:
       - SINK_HOST=sink
   sink:
-    image: bryandollery/ndsobc-microservice-dev
+    image: localhost:5000/labs/ndsobc-microservice-dev
     build:
       context: ./
       dockerfile: ./Dockerfile

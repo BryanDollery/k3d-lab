@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: sink
-        image: bryandollery/ndsobc-sink
+        image: registry.labs:5000/labs/ndsobc-sink
         ports:
         - containerPort: 80
 ---

@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: simple
-        image: bryandollery/ndsobc-simple
+        image: registry.labs:5000/labs/ndsobc-simple
         ports:
         - containerPort: 80
 ---

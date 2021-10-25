@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: source
-        image: bryandollery/ndsobc-source
+        image: registry.labs:5000/labs/ndsobc-source
         ports:
         - containerPort: 80
         env:

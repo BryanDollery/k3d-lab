@@ -17,4 +17,4 @@ spec:
   type: image
   params:
     - name: url
-      value: docker.io/bryandollery/corpora:lab
+      value: registry.labs:5000/labs/corpora:lab

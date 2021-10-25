@@ -4,13 +4,13 @@ run: stop start logs
 
 dev:
 	npm install
-	docker build --tag bryandollery/ndsobc-$$(basename $$PWD) -f Dockerfile-dev .
+	docker build --tag localhost:5000/labs/ndsobc-$$(basename $$PWD) -f Dockerfile-dev .
 
 build:
-	docker build --tag bryandollery/ndsobc-$$(basename $$PWD) .
+	docker build --tag localhost:5000/labs/ndsobc-$$(basename $$PWD) .
 
 push:
-	docker push bryandollery/ndsobc-$$(basename $$PWD)
+	docker push localhost:5000/labs/ndsobc-$$(basename $$PWD)
 
 PORT := 80
 EXPOSED_PORT := 9100
@@ -22,7 +22,7 @@ start:
 			 -p 3000:3000 \
 		   --hostname "$$(basename $$PWD)" \
 		   --name "$$(basename $$PWD)" \
-		   bryandollery/ndsobc-$$(basename $$PWD)
+		   localhost:5000/labs/ndsobc-$$(basename $$PWD)
 
 exec:
 	docker exec -it "$$(basename $$PWD)" bash || true

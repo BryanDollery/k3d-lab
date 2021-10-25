@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: corpora
-        image: bryandollery/corpora
+        image: registry.labs:5000/labs/corpora
         ports:
         - containerPort: 80
 ---
