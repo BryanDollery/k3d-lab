@@ -5,7 +5,7 @@ default: fmt pack
 pack:
 	time -p docker container run -it --rm \
 		--env AWS_PROFILE=labs \
-		-v $$PWD/../../../../creds:/root/.aws \
+		-v $$PWD/../../../creds:/root/.aws \
 		-v $$PWD:/$$(basename $$PWD) \
 		--hostname "$$(basename $$PWD)" \
 		--name "$$(basename $$PWD)" \

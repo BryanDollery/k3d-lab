@@ -1,55 +1,38 @@
-apiVersion: k3d.io/v1alpha2 
+apiVersion: k3d.io/v1alpha3
 kind: Simple 
 name: k3d-lab
 servers: 1 
-agents: 3
-image: rancher/k3s:v1.21.1-rc1-k3s1
+agents: 1
+image: rancher/k3s:v1.21.5-k3s2
 registries:
-  create: false
+  create:
+    name: registry.labs
+    host: "0.0.0.0"
+    hostPort: "5000"
 volumes:
-  - volume: /tmp/volumes/k3d0/:/volumes/k3d0
-    nodeFilters:
-      - agent[0]
-  - volume: /tmp/volumes/k3d1/:/volumes/k3d1
-    nodeFilters:
-      - agent[1]
-  - volume: /tmp/volumes/k3d2/:/volumes/k3d2
-    nodeFilters:
-      - agent[2]
   - volume: /tmp/volumes/k3d/:/volumes/k3d
     nodeFilters:
-      - agent[*]
-labels:
-  - label: vol=0
-    nodeFilters:
-      - agent[0]
-  - label: vol=1
-    nodeFilters:
-      - agent[1]
-  - label: vol=2
-    nodeFilters:
-      - agent[2]
-  - label: sharedvol=true
-    nodeFilters:
-      - agent[*]
+      - agent:*
 ports:
   - port: 30000:30000
     nodeFilters:
-      - agent[0]
+      - agent:0
   - port: 30001:30001
     nodeFilters:
-      - agent[0]
+      - agent:0
+  - port: 30002:30002
+    nodeFilters:
+      - agent:0
 options:
   k3d: 
     wait: true 
     timeout: "60s" 
-    disableLoadbalancer: true
     disableImageVolume: false 
-    disableHostIPInjection: false 
-  k3s: 
-    extraServerArgs: 
-      - --no-deploy=traefik
-      - --disable=metrics-server
   kubeconfig:
     updateDefaultKubeconfig: true 
     switchCurrentContext: true 
+  k3s:
+    nodeLabels:
+      - label: sharedvol=true
+        nodeFilters:
+          - agent:*
